@@ -1,6 +1,7 @@
 require 'net/http'
 require 'uri'
-require 'rubygems'
+require "rubygems"
+require 'bundler/setup'
 require 'nokogiri'
 require 'date'
 

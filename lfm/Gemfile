@@ -15,3 +15,7 @@ gem "jquery-rails"
 
 # To use debugger
 # gem 'debugger'
+
+# xml manipulation
+#
+gem "nokogiri"

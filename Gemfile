@@ -40,6 +40,7 @@ gem 'therubyracer'
 # To use debugger
 # gem 'debugger'
 
-# XML manipulation
-#
+# xml manipulation
 gem 'nokogiri'
+# lastfm homemade gem
+gem 'lfm', :path => 'lfm'

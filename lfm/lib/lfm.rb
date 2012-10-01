@@ -189,10 +189,3 @@ module LFM
     end
   end
 end
-
-#	puts LFM::Api.get_nok("").inspect
-
-event = LFM::Event.new(:id => 328799)
-event.get_info
-event.get_shouts
-puts event.inspect

@@ -1,0 +1,4 @@
+class <%= class_name %>Edge < ActiveRecord::Base
+  belongs_to :parent, :class_name => :<%= name %>
+  belongs_to :child, :class_name => :<%= name %>
+end

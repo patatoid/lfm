@@ -9,6 +9,24 @@ module ActsAsGraph
 		
 			# define defaults options
 			ActsAsGraph::process_options(self, options)
+
+			#habtm relation for parent and children collections
+			has_and_belongs_to_many self.options[:parent_collection].to_sym,
+				:class_name              => self.name,
+				:join_table              => self.options[:edge_table].to_s,
+				:association_foreign_key => self.options[:parent_col].to_s,
+				:foreign_key             => self.options[:child_col].to_s do
+				include TammerSaleh::Acts::Graph::Extensions::HABTM
+				end
+
+			has_and_belongs_to_many self.options[:child_collection].to_sym,
+				:class_name              => self.name,
+				:join_table              => self.options[:edge_table].to_s,
+				:association_foreign_key => self.options[:child_col].to_s,
+				:foreign_key             => self.options[:parent_col].to_s do
+				include TammerSaleh::Acts::Graph::Extensions::HABTM
+				end
+
 		end
 	end
 

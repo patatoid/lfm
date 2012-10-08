@@ -1,6 +1,6 @@
 class CreateEdges < ActiveRecord::Migration
   def up
-    create_table :<%= name.pluralize %>_edges, :id => false do |t|
+    create_table :<%= name %>_edges, :id => false do |t|
       t.integer :parent_id
       t.integer :child_id
       t.float :weight
@@ -8,17 +8,17 @@ class CreateEdges < ActiveRecord::Migration
 
     if connection.adapter_name == 'MySQL'
       execute <<-SQL
-      ALTER TABLE <%= name.pluralize %>_edges
+      ALTER TABLE <%= name %>_edges
         ADD CONSTRAINT fk_source
         FOREIGN KEY (parent_id)
-        REFERENCES <%= name.pluralize %>(id)
+        REFERENCES <%= name %>(id)
       SQL
 
       execute <<-SQL
-      ALTER TABLE <%= name.pluralize %>_edges
+      ALTER TABLE <%= name %>_edges
         ADD CONSTRAINT fk_destination
         FOREIGN KEY (parent_id)
-        REFERENCES <%= name.pluralize %>(id)
+        REFERENCES <%= name %>(id)
       SQL
     end
   end
@@ -26,15 +26,15 @@ class CreateEdges < ActiveRecord::Migration
   def down
     if connection.adapter_name == 'MySQL'
       execute <<-SQL
-      ALTER TABLE <%= name.pluralize %>_edges
+      ALTER TABLE <%= name %>_edges
         DROP FOREIGN KEY fk_source
       SQL
 
       execute <<-SQL
-      ALTER TABLE <%= name.pluralize %>_edges
+      ALTER TABLE <%= name %>_edges
         DROP FOREIGN KEY fk_destination
       SQL
     end
-    drop_table :<%= name.pluralize %>
+    drop_table :<%= name %>
   end
 end

@@ -1,7 +1,7 @@
 class ActsAsGraphGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
 	def create_edge_model
-		template "edge.rb.erb", "app/models/edge.rb"
+		template "edge.rb.erb", "app/models/#{name}_edge.rb"
 	end
 
   def create_migration

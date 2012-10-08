@@ -1,6 +1,6 @@
 class CreateEdges < ActiveRecord::Migration
   def up
-    create_table :artists_edges do |t|
+    create_table :artist_edges, :id => false do |t|
       t.integer :parent_id
       t.integer :child_id
       t.float :weight
@@ -8,33 +8,33 @@ class CreateEdges < ActiveRecord::Migration
 
     if connection.adapter_name == 'MySQL'
       execute <<-SQL
-      ALTER TABLE artists_edges
+      ALTER TABLE artist_edges
         ADD CONSTRAINT fk_source
         FOREIGN KEY (parent_id)
-        REFERENCES artists(id)
+        REFERENCES artist(id)
       SQL
 
       execute <<-SQL
-      ALTER TABLE artists_edges
+      ALTER TABLE artist_edges
         ADD CONSTRAINT fk_destination
         FOREIGN KEY (parent_id)
-        REFERENCES artists(id)
+        REFERENCES artist(id)
       SQL
     end
   end
 
   def down
-    if ActiveRecord::Base.connection.adapter_name == 'MySQL'
+    if connection.adapter_name == 'MySQL'
       execute <<-SQL
-      ALTER TABLE artists_edges
+      ALTER TABLE artist_edges
         DROP FOREIGN KEY fk_source
       SQL
 
       execute <<-SQL
-      ALTER TABLE artists_edges
+      ALTER TABLE artist_edges
         DROP FOREIGN KEY fk_destination
       SQL
     end
-    drop_table :artists
+    drop_table :artist
   end
 end

@@ -44,3 +44,5 @@ gem 'therubyracer'
 gem 'nokogiri'
 # lastfm homemade gem
 gem 'lfm', :path => 'lfm'
+gem 'acts_as_graph', :path => 'acts_as_graph'
+

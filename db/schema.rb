@@ -19,4 +19,13 @@ ActiveRecord::Schema.define(:version => 20121008184037) do
     t.float   "weight"
   end
 
+  create_table "artists", :force => true do |t|
+    t.string   "name"
+    t.string   "mbid"
+    t.integer  "listenings"
+    t.string   "url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
 end

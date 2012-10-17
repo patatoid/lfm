@@ -1,13 +1,19 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+a:
+  id: 1
+  name: "A"
 
-one:
-  name: MyString
-  mbid: MyString
-  listenings: 1
-  url: MyString
+b:
+  id: 2
+  name: "B"
 
-two:
-  name: MyString
-  mbid: MyString
-  listenings: 1
-  url: MyString
+c:
+  id: 3
+  name: "C"
+
+d:
+  id: 4
+  name: "D"
+
+e:
+  id: 5
+  name: "E"

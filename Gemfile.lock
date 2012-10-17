@@ -1,4 +1,10 @@
 PATH
+  remote: acts_as_graph
+  specs:
+    acts_as_graph (0.0.1)
+      rails (~> 3.2.8)
+
+PATH
   remote: lfm
   specs:
     lfm (0.0.1)
@@ -113,6 +119,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_graph!
   coffee-rails (~> 3.2.1)
   execjs
   jquery-rails

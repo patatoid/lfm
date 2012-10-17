@@ -1,11 +1,11 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "acts-as-graph/version"
+require "acts_as_graph/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "acts-as-graph"
+  s.name        = "acts_as_graph"
   s.version     = ActsAsGraph::VERSION
   s.authors     = ["TODO: Your name"]
   s.email       = ["TODO: Your email"]

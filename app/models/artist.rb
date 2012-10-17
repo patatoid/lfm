@@ -1,7 +1,5 @@
 class Artist < ActiveRecord::Base
-  attr_accessible :listenings, :mbid, :name, :url
-
- # acts_as_graph
+  acts_as_graph
 
   def graph(depth = 2)
     return if depth == 0 

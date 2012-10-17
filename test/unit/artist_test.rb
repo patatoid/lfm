@@ -4,13 +4,20 @@ class ArtistTest < ActiveSupport::TestCase
   fixtures :artists, :artist_edges
 
   test "directed graphs edges" do
-    Artist.send "acts_as_graph"
-    assert_equal [artists(:b),
+    Artist.graph_options ? Artist.send(:acts_as_graph) : Artist.graph_options[:directed] = true
+     assert_equal [artists(:b),
                   artists(:c),
                   artists(:d),
                   artists(:e)], 
                 artists(:a).children, 
-                "bad directed edges definition"
+                "children relationship"
+    assert_equal [artists(:a),
+                  artists(:b),
+                  artists(:c),
+                  artists(:d)], 
+                artists(:e).parents, 
+                "parents relationship"
+    
   end
 
   test "bad test" do

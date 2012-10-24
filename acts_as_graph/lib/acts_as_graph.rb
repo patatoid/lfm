@@ -23,22 +23,17 @@ module ActsAsGraph
 
       else
         #ActsAsGraph::undirected_association(self, self.graph_options)
-        finder_sql = '
-     SELECT Child.* 
-     FROM "#{self.table_name}" AS Parent 
-       INNER JOIN #{self.graph_options[:edge_table]}
-         ON #{self.table_name}.id = #{self.graph_options[:edge_table]}.#{self.graph_options[:parent_col]}
-       INNER JOIN #{self.table_name} AS Child 
-         ON #{self.table_name}.id = #{self.graph_options[:edge_table]}.#{self.graph_options[:child_col]}
-     WHERE Parent.id = #{id}
-     UNION
-     SELECT Parent.* 
-     FROM #{self.table_name} AS Parent 
-       INNER JOIN #{self.graph_options[:edge_table]}
-         ON #{self.table_name}.id = #{self.graph_options[:edge_table]}.#{self.graph_options[:parent_col]}
-       INNER JOIN #{self.table_name} AS Child 
-         ON #{self.table_name}.id = #{self.graph_options[:edge_table]}.#{self.graph_options[:child_col]}
-     WHERE Child.id = #{id}'
+        finder_sql = proc { "SELECT Child.* 
+          FROM #{self.class.table_name} AS Parent 
+            INNER JOIN #{self.graph_options[:edge_table]} ON Parent.id = #{self.graph_options[:edge_table]}.#{self.graph_options[:parent_col]} 
+            INNER JOIN #{self.class.table_name} AS Child ON Child.id = #{self.graph_options[:edge_table]}.#{self.graph_options[:child_col]} 
+          WHERE Parent.id = #{id} 
+          UNION 
+          SELECT Parent.* 
+          FROM #{self.class.table_name} AS Parent 
+            INNER JOIN #{self.graph_options[:edge_table]} ON Parent.id = #{self.graph_options[:edge_table]}.#{self.graph_options[:parent_col]} 
+            INNER JOIN #{self.class.table_name} AS Child ON Child.id = #{self.graph_options[:edge_table]}.#{self.graph_options[:child_col]} 
+          WHERE Child.id = #{id}"}
 
      has_many :neighbours,
        :class_name             => self.name,

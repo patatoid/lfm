@@ -1,5 +1,5 @@
 class Artist < ActiveRecord::Base
-  acts_as_graph
+#  acts_as_graph
 
   def graph(depth = 2)
     return if depth == 0 

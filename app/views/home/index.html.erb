@@ -1,6 +1,7 @@
 <h1>Home#index</h1>
 <p>Find me in app/views/home/index.html.erb</p>
 <div id="sigma-example"></div>
+<div id="artist-graph"></div>
 <script>
 function init() {
 // Instanciate sigma.js and customize it :
@@ -14,7 +15,8 @@ defaultLabelColor: '#fff'
 //   . C clusters
 //   . d the proportion of edges that connect two nodes
 //     from the same cluster
-var i, N = 500, E = 3000, C = 5, d = 0.5, clusters = [];
+/*
+var i, N = 50, E = 1000, C = 5, d = 0.5, clusters = [];
 for(i = 0; i < C; i++){
 clusters.push({
 'id': i,
@@ -45,21 +47,41 @@ var cluster = clusters[(Math.random()*C)|0], n = cluster.nodes.length;
 sigInst.addEdge(i,cluster.nodes[Math.random()*n|0],cluster.nodes[Math.random()*n|0]);
 }
 }
+*/
+//artist graph
 
+var sigInst = sigma.init(document.getElementById('sigma-example')).drawingProperties({
+defaultLabelColor: '#999'
+});
+<% @artists.each do |artist| %>
+  sigInst.addNode('<%= artist.id %>',{
+    'label': '<%= artist.name %>',
+    'x': Math.random(),
+    'y': Math.random(),
+    'size': <%= (Math.log(artist.listenings.to_i)/Math.log(Artist.maximum(:listenings)))*10 %>,
+    'color': 'rgb(50, 50, 200)'
+  });
+<% end %>
+
+<% i = 0 %>
+<% @artist_edges.each do |artist_edge| %>
+  <% i+=1 %>
+sigInst.addEdge('<%= i %>', '<%= artist_edge.parent_id %>', '<%= artist_edge.child_id %>')
+<% end %>
 // Start the ForceAtlas2 algorithm
 // (requires "sigma.forceatlas2.js" to be included)
 sigInst.startForceAtlas2();
 
 var isRunning = true;
-document.getElementById('stop-layout').addEventListener('click',function(){
+document.getElementById('sigma-example').addEventListener('click',function(){
 if(isRunning){
 isRunning = false;
 sigInst.stopForceAtlas2();
-document.getElementById('stop-layout').childNodes[0].nodeValue = 'Start Layout';
+document.getElementById('sigma-example').childNodes[0].nodeValue = 'Start Layout';
 }else{
 isRunning = true;
 sigInst.startForceAtlas2();
-document.getElementById('stop-layout').childNodes[0].nodeValue = 'Stop Layout';
+document.getElementById('sigma-example').childNodes[0].nodeValue = 'Stop Layout';
 }
 },true);
 document.getElementById('rescale-graph').addEventListener('click',function(){

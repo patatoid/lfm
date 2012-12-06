@@ -37,7 +37,8 @@ module ActsAsGraph
 
      has_many :neighbours,
        :class_name             => self.name,
-       :finder_sql             => finder_sql
+       :finder_sql             => finder_sql,
+       :through                => "#{self.name.to_s.underscore}_edges"
       end
     end
   end

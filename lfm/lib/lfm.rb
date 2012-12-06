@@ -55,6 +55,7 @@ module LFM
     end
 
     def self.get_nok(method, params={})
+     
       res = Net::HTTP.start LFM::HOST do |http|
         path = ([] << "/2.0/?method=#{method}" << params.collect{|k,v| "#{k}=#{v}"}.join("&") << "api_key=#{LFM::APIKEY}").join("&")
         puts URI.escape(path)
@@ -65,7 +66,6 @@ module LFM
       #raise "HTTP error : #{res.code}"	unless res.code =~ /2\d\d/ 
 
       nok_res = Nokogiri::XML(res.body)
-      #puts nok_res.inspect
       if nok_res.at_css("lfm")['status'] == "failed"
         raise LFM::Exception.new(nok_res.at_css("error")['code'], nok_res.at_css("lfm error").content)
       end
@@ -170,7 +170,13 @@ module LFM
 
 		#Get all the artists similar to this artist
     def get_similar
-      nok_artists = LFM::Api.get_nok("artist.getsimilar", {:artist => self.name})
+      i=0
+      begin
+        i+=1
+        nok_artists = LFM::Api.get_nok("artist.getsimilar", {:artist => self.name})
+      rescue
+        retry if i < 6
+      end
       similar_artists = {}
       nok_artists.xpath("//artist").each do |nok_artist|
         similar_artists.merge! nok_artist.at("match").content.to_f => Artist.new(:name => nok_artist.at("name").content, :mbid => nok_artist.at("mbid").content)
@@ -184,7 +190,13 @@ module LFM
     end
 
     def listenings
-      nok_tracks = LFM::Api.get_nok("artist.getTopTracks", {:artist => self.name, :limit => 100})
+      i=0
+      begin
+        i+=1
+        nok_tracks = LFM::Api.get_nok("artist.getTopTracks", {:artist => self.name, :limit => 100})
+      rescue
+        retry if i < 6
+      end
       return nok_tracks.xpath("//playcount").inject(0) {|r, pc| r + pc.content.to_i }
     end
   end

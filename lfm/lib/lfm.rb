@@ -172,10 +172,10 @@ module LFM
     def get_similar
       i=0
       begin
-        i+=1
         nok_artists = LFM::Api.get_nok("artist.getsimilar", {:artist => self.name})
       rescue
-        retry if i < 6
+        i+=1
+        retry if i < 5
       end
       similar_artists = {}
       nok_artists.xpath("//artist").each do |nok_artist|
@@ -192,10 +192,10 @@ module LFM
     def listenings
       i=0
       begin
-        i+=1
         nok_tracks = LFM::Api.get_nok("artist.getTopTracks", {:artist => self.name, :limit => 100})
       rescue
-        retry if i < 6
+        i+=1
+        retry if i < 5
       end
       return nok_tracks.xpath("//playcount").inject(0) {|r, pc| r + pc.content.to_i }
     end

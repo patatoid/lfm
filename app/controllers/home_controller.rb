@@ -1,6 +1,11 @@
 class HomeController < ApplicationController
   def index
-    @artists = Artist.find :all, :order => 'listenings DESC'
-    @artist_edges = ArtistEdge.find :all
+    @artists = []
+    i=0
+    Artist.find(:first).bfs do |a|
+      break unless i < 100
+      i+=1
+      @artists << a
+    end
   end
 end

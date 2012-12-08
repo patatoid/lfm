@@ -53,6 +53,23 @@ module ActsAsGraph
         self.dfs(seen, child, &block) unless seen.include?(child)
       end
     end
+
+    def bfs(&block)
+      q = []
+      seen = []
+      seen << self.id
+      q << self
+      until q.empty?
+        current_node = q.shift
+        block.call(current_node)
+        current_node.children.each do |child|
+          unless seen.include?(child.id)
+            seen << child.id
+            q << child
+          end
+        end
+      end
+    end
   end
 
   def self.process_options(klass, opts)
@@ -110,5 +127,5 @@ module ActsAsGraph
         :finder_sql             => finder_sql
   end
 end
-  ActiveRecord::Base.send :extend, ActsAsGraph::ClassMethods
-  ActiveRecord::Base.send :include, ActsAsGraph::InstanceMethods
+ActiveRecord::Base.send :extend, ActsAsGraph::ClassMethods
+ActiveRecord::Base.send :include, ActsAsGraph::InstanceMethods

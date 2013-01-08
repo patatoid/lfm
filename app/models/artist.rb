@@ -6,12 +6,11 @@ class Artist < ActiveRecord::Base
   def graph(depth = 2)
     lfma = LFM::Artist.new(:name => self.name, :mbid => self.mbid)
     self.update_attribute :listenings, lfma.listenings
-    return if depth == 0 
     lfma.get_similar.each do |match, lfma_son|
-      a = self.children.create(:name => lfma_son.name, :mbid => lfma_son.mbid)
-      ArtistEdge.find(:first, :conditions => {:parent_id => self.id, :child_id => a.id}).update_attribute(:weight, match)
+      a = Artist.find_or_create_by_name_and_mbid(lfma_son.name, lfma_son.mbid)
+      ArtistEdge.create(:parent_id => self.id, :child_id => a.id, :weight => match)
       if a.listenings.nil?
-        a.graph(depth - 1)
+        a.graph(depth - 1) unless depth == 0 
       end
     end
   end

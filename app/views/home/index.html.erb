@@ -1,6 +1,8 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
 <div id="sigma-example"></div>
+<button id="button">filter</button>
+<p id ="inScreen"style="color:green"></p>
+<p id ="outScreen"style="color:orange"></p>
+<p id ="hidden"style="color:red"></p>
 <script>
   function init() {
     /*
@@ -50,17 +52,17 @@
     //artist graph
 
     // Instanciate sigma.js and customize it :
-    var sigInst = sigma.init(document.getElementById('sigma-example')).drawingProperties({
+    sigInst = sigma.init(document.getElementById('sigma-example')).drawingProperties({
       defaultLabelColor: '#999'
     });
     <% i = 0 %>
     <% @artists.each do |artist| %>
       sigInst.addNode('<%= artist.id %>',{
-        'label': '<%= artist.name %>',
+        'label': '<%=raw artist.name %>',
         'x': Math.random(),
         'y': Math.random(),
         'size': <%= (Math.log(artist.listenings.to_i)/Math.log(Artist.maximum(:listenings)))*10 %>,
-        'color': 'rgb(50, 50, 200)'
+        'color': 'rgb(100, 50, 20)'
       });
     <% end %>
     <% @artists.each do |artist| %>
@@ -73,25 +75,65 @@
     <% end %>
     // Start the ForceAtlas2 algorithm
     // (requires "sigma.forceatlas2.js" to be included)
-    sigInst.startForceAtlas2();
+    //sigInst.startForceAtlas2();
 
-    var isRunning = true;
+    var isRunning = false;
     document.getElementById('sigma-example').addEventListener('click',function(){
       if(isRunning){
         isRunning = false;
         sigInst.stopForceAtlas2();
-        document.getElementById('sigma-example').childNodes[0].nodeValue = 'Start Layout';
         }else{
         isRunning = true;
         sigInst.startForceAtlas2();
-        document.getElementById('sigma-example').childNodes[0].nodeValue = 'Stop Layout';
       }
     },true);
-    document.getElementById('rescale-graph').addEventListener('click',function(){
-      sigInst.position(0,0,1).draw();
-    },true);
-  }
 
+    // Bind events :
+    var greyColor = '#666';
+    sigInst.bind('overnodes',function(event){
+      var nodes = event.content;
+      var neighbors = {};
+      sigInst.iterEdges(function(e){
+        if(nodes.indexOf(e.source)<0 && nodes.indexOf(e.target)<0){
+          if(!e.attr['grey']){
+            e.attr['true_color'] = e.color;
+            e.color = greyColor;
+            e.attr['grey'] = 1;
+          }
+          }else{
+          e.color = e.attr['grey'] ? e.attr['true_color'] : e.color;
+          e.attr['grey'] = 0;
+
+          neighbors[e.source] = 1;
+          neighbors[e.target] = 1;
+        }
+        }).iterNodes(function(n){
+        if(!neighbors[n.id]){
+          if(!n.attr['grey']){
+            n.attr['true_color'] = n.color;
+            n.color = greyColor;
+            n.attr['grey'] = 1;
+          }
+          }else{
+          n.color = n.attr['grey'] ? n.attr['true_color'] : n.color;
+          n.attr['grey'] = 0;
+        }
+      }).draw(2,2,2);
+      }).bind('outnodes',function(){
+      sigInst.iterEdges(function(e){
+        e.color = e.attr['grey'] ? e.attr['true_color'] : e.color;
+        e.attr['grey'] = 0;
+        }).iterNodes(function(n){
+        n.color = n.attr['grey'] ? n.attr['true_color'] : n.color;
+        n.attr['grey'] = 0;
+      }).draw(2,2,2);
+    });
+
+    sigInst.zoom_filter();
+
+    sigInst.draw();
+  };
+  var sigInst;
   if (document.addEventListener) {
     document.addEventListener('DOMContentLoaded', init, false);
     } else {

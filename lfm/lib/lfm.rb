@@ -186,7 +186,7 @@ module LFM
 
     def self.search(artist_name)
       nok_artists = LFM::Api.get_nok("artist.search", {:artist => artist_name})
-      Artist.new(:name => nok_artist.at("name").content, :mbid => nok_artist.at("mbid").content)
+      Artist.new(:name => nok_artists.at("name").content, :mbid => nok_artists.at("mbid").content)
     end
 
     def listenings

@@ -11,9 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121206145132) do
+ActiveRecord::Schema.define(:version => 20121008184037) do
 
-  create_table "artist_edges", :force => true do |t|
+  create_table "artist_edges", :id => false, :force => true do |t|
     t.integer "parent_id"
     t.integer "child_id"
     t.float   "weight"

@@ -12,7 +12,8 @@
  *= require_tree .
  */
 #sigma-example {
-  height: 600px;
-  width: 600px;
+  background-color: black;
+  height: 400px;
+  width: 100%;
   /*background-color: #999;*/
 }

@@ -1,5 +1,6 @@
 <div id="sigma-example"></div>
 <button id="button">filter</button>
+<button id="force-atlas">force-atlas</button>
 <p id ="inScreen"style="color:green"></p>
 <p id ="outScreen"style="color:orange"></p>
 <p id ="hidden"style="color:red"></p>
@@ -58,7 +59,7 @@
     <% i = 0 %>
     <% @artists.each do |artist| %>
       sigInst.addNode('<%= artist.id %>',{
-        'label': '<%=raw artist.name %>',
+        'label': '<%=raw artist.name + " - " + artist.listenings.to_s %>',
         'x': Math.random(),
         'y': Math.random(),
         'size': <%= (Math.log(artist.listenings.to_i)/Math.log(Artist.maximum(:listenings)))*10 %>,
@@ -78,7 +79,7 @@
     //sigInst.startForceAtlas2();
 
     var isRunning = false;
-    document.getElementById('sigma-example').addEventListener('click',function(){
+    document.getElementById('force-atlas').addEventListener('click',function(){
       if(isRunning){
         isRunning = false;
         sigInst.stopForceAtlas2();

@@ -24,8 +24,7 @@ sigma.zoom_filter.zoom_filter = function(sigInst) {
 	this.hidden_nodes = [];
 
 	this.isOnScreen = function(node){
-		return (node['hidden']) ||
-			(node['displayX'] + node['displaySize'] < sigInst._core.width) &&
+		return (node['displayX'] + node['displaySize'] < sigInst._core.width) &&
 			(node['displayX'] - node['displaySize'] > 0) &&
 			(node['displayY'] + node['displaySize'] < sigInst._core.height) &&
 			(node['displayY'] - node['displaySize'] > 0)
@@ -34,7 +33,7 @@ sigma.zoom_filter.zoom_filter = function(sigInst) {
 	this.check_nodes = function() {
 		var i;
 		sigInst._core.graph.nodes.forEach(function(node) {
-			if (self.isOnScreen(node)){
+			if (self.isOnScreen(node) && !node['hidden']){
 				if (self.visible_nodes.indexOf(node) < 0) {self.visible_nodes.push(node)};
 				i = self.offScreen_nodes.indexOf(node);
 				if (i >= 0) {self.offScreen_nodes.splice(i, 1)};
@@ -72,8 +71,13 @@ sigma.zoom_filter.zoom_filter = function(sigInst) {
 				self.hidden_nodes.push(node)
 			})
 		}else{
-			diff = self.p.max_displayed_nodes - self.visible_nodes.length
-			self.hidden_nodes.filter(function(node) {return self.isOnScreen(node)}).splice(0, self.hidden_nodes.length < diff ? self.hidden_nodes.length : diff).forEach(function(node) {
+			diff = self.p.max_displayed_nodes - self.visible_nodes.length;
+			
+			hidden_nodes_on_screen = 	self.hidden_nodes.filter(function(node) {return self.isOnScreen(node)})
+
+			hidden_nodes_on_screen
+			.splice(0, hidden_nodes_on_screen.length < diff ? hidden_nodes_on_screen.length : diff)
+			.forEach(function(node) {
 				self.visible_nodes.push(node);
 				self.hidden_nodes.splice(self.hidden_nodes.indexOf(node), 1);
 			})
@@ -91,7 +95,7 @@ sigma.zoom_filter.zoom_filter = function(sigInst) {
 			node['hidden'] = false;
 		});
 
-	//	self.display_hidden_offScreen_visible_nodes();
+//		self.display_hidden_offScreen_visible_nodes();
 	}
 
 	this.delete = function() {

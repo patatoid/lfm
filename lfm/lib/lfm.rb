@@ -159,7 +159,7 @@ module LFM
       i=0
       begin
         nok_artists = LFM::Api.get_nok("artist.getsimilar", {:artist => self.name})
-      rescue
+      rescue Exception
         i+=1
         retry if i < 5
       end
@@ -179,7 +179,7 @@ module LFM
       i=0
       begin
         nok_tracks = LFM::Api.get_nok("artist.getTopTracks", {:artist => self.name, :limit => 100})
-      rescue
+      rescue Exception
         i+=1
         retry if i < 5
       end

@@ -59,7 +59,7 @@
     <% i = 0 %>
     <% @artists.each do |artist| %>
       sigInst.addNode('<%= artist.id %>',{
-        'label': '<%=raw artist.name + " - " + artist.listenings.to_s %>',
+        'label': '<%=raw artist.name.gsub("'", " ") + " - " + artist.listenings.to_s %>',
         'x': Math.random(),
         'y': Math.random(),
         'size': <%= (Math.log(artist.listenings.to_i)/Math.log(Artist.maximum(:listenings)))*10 %>,
@@ -130,7 +130,18 @@
       }).draw(2,2,2);
     });
 
-    sigInst.zoom_filter();
+   // sigInst.zoom_filter();
+
+    document.getElementById('button').addEventListener('click', function() {
+      if (document.getElementById('button').innerHTML == 'filter') {
+        sigInst.start_filtering();
+        document.getElementById('button').innerHTML = 'unfilter';
+        }else{
+        sigInst.stop_filtering();
+        document.getElementById('button').innerHTML = 'filter';
+      }
+    }, true);
+
 
     sigInst.draw();
   };

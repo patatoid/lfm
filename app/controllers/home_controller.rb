@@ -3,9 +3,9 @@ class HomeController < ApplicationController
     @artists = []
     i=0
     Artist.find(:first).bfs do |a|
-      break unless i < 100
+      break unless i < 300
       i+=1
       @artists << a
-    end
+    end if Artist.find(:first)
   end
 end

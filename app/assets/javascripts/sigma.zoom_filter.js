@@ -16,7 +16,7 @@ sigma.zoom_filter.zoom_filter = function(sigInst) {
 	var self = this;
 
 	this.p = {
-		max_displayed_nodes: 20
+		max_displayed_nodes: 50
 	};
 
 	this.visible_nodes = [];
@@ -30,7 +30,7 @@ sigma.zoom_filter.zoom_filter = function(sigInst) {
 			(node['displayY'] - node['displaySize'] > 0)
 	}
 
-	this.check_nodes = function() {
+	this.add_on_screen_nodes = function() {
 		var i;
 		sigInst._core.graph.nodes.forEach(function(node) {
 			if (self.isOnScreen(node) && !node['hidden']){
@@ -45,25 +45,28 @@ sigma.zoom_filter.zoom_filter = function(sigInst) {
 		})
 	}
 
-	this.display_hidden_offScreen_visible_nodes = function() {
-		document.getElementById('inScreen').innerHTML = "";
-		document.getElementById('outScreen').innerHTML = "";
-		document.getElementById('hidden').innerHTML = "";
-		self.visible_nodes.forEach(function(node) {document.getElementById('inScreen').innerHTML += node['size'] + " - "});
-		self.offScreen_nodes.forEach(function(node) {document.getElementById('outScreen').innerHTML += node['size'] + " - "});
-		self.hidden_nodes.forEach(function(node) {document.getElementById('hidden').innerHTML += node['size'] + " - "});
+	this.hide_node = function(node) {	
+		node['hidden'] = true;
 	}
 
-	this.filter = function() {
-		self.check_nodes();
+	this.show_node = function(node) {
+		node['hidden'] = false;
+	}
 
-		self.visible_nodes.sort(function(a, b) {return b['size'] - a['size']});
-		self.hidden_nodes.sort(function(a, b) {return b['size'] - a['size']});
+	this.sort_nodes_DESC = function(nodes) {
+		nodes.sort(function(a, b) {return b['size'] - a['size']});
+	}
+
+	this.validate_nodes = function() {
+		self.add_on_screen_nodes();
+
+		self.sort_nodes_DESC(self.visible_nodes);
+		self.sort_nodes_DESC(self.hidden_nodes);
 		
 		while ((!self.visible_nodes[0] == null && !self.hidden_nodes[0] == null) && 
 				(self.visible_nodes[0]['size'] < self.hidden_nodes[0]['size'])) {
 			self.visible_nodes.push(self.hidden_nodes.shift());
-			self.visible_nodes.sort(function(a, b) {return b['size'] - a['size']});
+			self.sort_nodes_DESC(self.visible_nodes);
 		}
 		
 		if (self.visible_nodes.length > self.p.max_displayed_nodes) {
@@ -76,34 +79,30 @@ sigma.zoom_filter.zoom_filter = function(sigInst) {
 			hidden_nodes_on_screen = 	self.hidden_nodes.filter(function(node) {return self.isOnScreen(node)})
 
 			hidden_nodes_on_screen
-			.splice(0, hidden_nodes_on_screen.length < diff ? hidden_nodes_on_screen.length : diff)
+			.splice(0, diff)
 			.forEach(function(node) {
 				self.visible_nodes.push(node);
 				self.hidden_nodes.splice(self.hidden_nodes.indexOf(node), 1);
 			})
 		}
+	}
+
+	this.filter = function() {
+		self.validate_nodes();
 
 		self.hidden_nodes.forEach(function(node) {
-			//i = sigInst._core.graph.nodes.indexOf(node);
-			//if (i) {sigInst._core.graph.nodes.splice(i, 1)}
-			node['hidden'] = true;
+			self.hide_node(node)
 		});
 
 		self.visible_nodes.forEach(function(node) {
-			//i = sigInst._core.graph.nodes.indexOf(node);
-			//if (i) {sigInst._core.graph.nodes.push(node)}
-			node['hidden'] = false;
+			self.show_node(node)
 		});
-
-//		self.display_hidden_offScreen_visible_nodes();
 	}
 
 	this.delete = function() {
 		self.hidden_nodes.forEach(function(node) {
-			//sigInst._core.graph.nodes.push(node)
-			node['hidden'] = false;
+			self.show_node(node)
 		});
-
 		self.hidden_nodes = [];
 	}
 
@@ -124,21 +123,13 @@ sigma.zoom_filter.zoom_filter = function(sigInst) {
 		}
 		sigInst.draw();
 	}
-
-//	sigInst._core.domRoot.addEventListener('mousewheel', function(e) {self.filter()}, false);
-	document.getElementById('button').addEventListener('click', function() {
-		if (document.getElementById('button').innerHTML == 'filter') {
-			self.start_filtering();
-			document.getElementById('button').innerHTML = 'unfilter';
-		}else{
-			self.stop_filtering();
-			document.getElementById('button').innerHTML = 'filter';
-		}
-	}, true);
-
 }
 
-sigma.publicPrototype.zoom_filter = function() {
-	sigma.zoom_filter.zoom_filter(this);
+sigma.publicPrototype.start_filtering = function() {
+	this.zoom_filter = new sigma.zoom_filter.zoom_filter(this);
+	this.zoom_filter.start_filtering();
 }
 
+sigma.publicPrototype.stop_filtering = function() {
+	this.zoom_filter.stop_filtering();
+}

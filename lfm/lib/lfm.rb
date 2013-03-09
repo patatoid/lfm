@@ -40,25 +40,7 @@ module LFM
     def self.get(method, params={})
       res = Net::HTTP.start LFM::HOST do |http|
         path = ([] << "/2.0/?method=#{method}" << params.collect{|k,v| "#{k}=#{v}"}.join("&") << "api_key=#{LFM::APIKEY}").join("&")
-        puts URI.escape(path)
-        req = Net::HTTP::Get.new URI.escape(path)
-        response = http.request req
-      end
-
-      #raise "HTTP error : #{res.code}"	unless res.code =~ /2\d\d/ 
-
-      nok_res = Nokogiri::XML(res.body)
-      if nok_res.at_css("lfm")['status'] = "failed"
-        raise LFM::Exception.new(nok_res.at_css("error")['code'], nok_res.at_css("lfm error").content)
-      end
-      return res.body
-    end
-
-    def self.get_nok(method, params={})
-     
-      res = Net::HTTP.start LFM::HOST do |http|
-        path = ([] << "/2.0/?method=#{method}" << params.collect{|k,v| "#{k}=#{v}"}.join("&") << "api_key=#{LFM::APIKEY}").join("&")
-        puts URI.escape(path)
+        puts LFM::HOST + URI.escape(path)
         req = Net::HTTP::Get.new URI.escape(path)
         response = http.request req
       end
@@ -69,7 +51,11 @@ module LFM
       if nok_res.at_css("lfm")['status'] == "failed"
         raise LFM::Exception.new(nok_res.at_css("error")['code'], nok_res.at_css("lfm error").content)
       end
-      return nok_res.remove_namespaces!
+      return res.body
+    end
+
+    def self.get_nok(method, params={})
+      return Nokogiri::XML(self.get(method, params)).remove_namespaces!
     end
   end
 
@@ -160,7 +146,7 @@ module LFM
     #Use the last.fm corrections data to check whether the supplied artist has a correction to a canonical artist 
     def self.get_correction(name)
       nok_result = LFM::Api.get_nok("artist.getcorrection", {:artist => name})
-      reutrn LFM::Aritst.new(:name => nok_result.at_css("name").content, :mbid => nok_result.at_css("mbid"), :url => nok_result.at_css("url"))
+      return LFM::Artist.new(:name => nok_result.at_css("name").content, :mbid => nok_result.at_css("mbid").content, :url => nok_result.at_css("url").content)
 		end
 
 		#Get a list of upcoming events for this artist. Easily integratable into calendars, using the ical standard (see feeds section below).

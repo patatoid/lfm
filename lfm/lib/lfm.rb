@@ -172,7 +172,14 @@ module LFM
     end
 
     def self.search(artist_name)
-      nok_artists = LFM::Api.get_nok("artist.search", {:artist => artist_name})
+      i=0
+      begin
+        nok_artists = LFM::Api.get_nok("artist.search", {:artist => artist_name})
+      rescue Exception
+        i+=1
+        retry if i<5
+        return
+      end
       Artist.new(:name => nok_artists.at("name").content, :mbid => nok_artists.at("mbid").content)
     end
 

@@ -162,6 +162,7 @@ module LFM
       rescue Exception
         i+=1
         retry if i < 5
+        return
       end
       similar_artists = {}
       nok_artists.xpath("//artist").each do |nok_artist|
@@ -182,6 +183,7 @@ module LFM
       rescue Exception
         i+=1
         retry if i < 5
+        return
       end
       return nok_tracks.xpath("//playcount").inject(0) {|r, pc| r + pc.content.to_i }
     end

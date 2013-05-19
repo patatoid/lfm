@@ -13,7 +13,7 @@ class HomeController < ApplicationController
     if @artist
       i=0
       @artist.bfs do |a|
-        break unless i < 10
+        break unless i < 200
         i+=1
         @artists << a
       end

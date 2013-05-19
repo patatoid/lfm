@@ -11,13 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121008184037) do
+ActiveRecord::Schema.define(:version => 20130519125510) do
 
   create_table "artist_edges", :id => false, :force => true do |t|
     t.integer "parent_id"
     t.integer "child_id"
     t.float   "weight"
   end
+
+  add_index "artist_edges", ["child_id"], :name => "index_artist_edges_on_child_id"
+  add_index "artist_edges", ["parent_id"], :name => "index_artist_edges_on_parent_id"
 
   create_table "artists", :force => true do |t|
     t.string   "name"
@@ -27,5 +30,7 @@ ActiveRecord::Schema.define(:version => 20121008184037) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "artists", ["listenings"], :name => "index_artists_on_listenings"
 
 end

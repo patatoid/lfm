@@ -1,9 +1,18 @@
 <div id="sigma-example"></div>
-<button id="button">filter</button>
-<button id="force-atlas">force-atlas</button>
-<p id ="inScreen"style="color:green"></p>
-<p id ="outScreen"style="color:orange"></p>
-<p id ="hidden"style="color:red"></p>
+<button id="filter">filter</button>
+<button id="force-atlas">start force-atlas</button>
+<%= form_tag do %>
+  <%= label :artist, :name %>
+  <%= text_field :artist_search, :name %>
+  <%= submit_tag "search artist"%>
+<% end -%>
+<%= "<p class='warning'>#{flash[:warning]}</p>" if flash[:warning] %>
+<% if @search_results -%>
+  <h2>Search results</h2>
+  <% @search_results.each do |artist| -%>
+    <p> <%= link_to artist.name, {:action => 'index', "artist[name]" => artist.name} %> </p>
+  <% end -%>
+<% end -%>
 <script>
   function init() {
     /*
@@ -57,12 +66,14 @@
       defaultLabelColor: '#999'
     });
     <% i = 0 %>
+    <% max = @artists.inject(0){ |max, artist| max = (artist.listenings || 0) < max ? max : artist.listenings } -%>
     <% @artists.each do |artist| %>
       sigInst.addNode('<%= artist.id %>',{
         'label': '<%=raw artist.name.gsub("'", " ") + " - " + artist.listenings.to_s %>',
         'x': Math.random(),
         'y': Math.random(),
-        'size': <%= (Math.log(artist.listenings.to_i)/Math.log(Artist.maximum(:listenings)))*10 %>,
+        <% size = (Math.log(artist.listenings.to_i)/Math.log(max))*10 -%>
+        'size': <%= size < 1 ? 1 : size %>,
         'color': 'rgb(100, 50, 20)'
       });
     <% end %>
@@ -83,9 +94,11 @@
       if(isRunning){
         isRunning = false;
         sigInst.stopForceAtlas2();
+        document.getElementById('force-atlas').innerHTML = 'start force-atlas';
         }else{
         isRunning = true;
         sigInst.startForceAtlas2();
+        document.getElementById('force-atlas').innerHTML = 'stop force-atlas';
       }
     },true);
 
@@ -132,13 +145,13 @@
 
    // sigInst.zoom_filter();
 
-    document.getElementById('button').addEventListener('click', function() {
-      if (document.getElementById('button').innerHTML == 'filter') {
+    document.getElementById('filter').addEventListener('click', function() {
+      if (document.getElementById('filter').innerHTML == 'filter') {
         sigInst.start_filtering();
-        document.getElementById('button').innerHTML = 'unfilter';
+        document.getElementById('filter').innerHTML = 'unfilter';
         }else{
         sigInst.stop_filtering();
-        document.getElementById('button').innerHTML = 'filter';
+        document.getElementById('filter').innerHTML = 'filter';
       }
     }, true);
 

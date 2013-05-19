@@ -6,7 +6,7 @@
   <%= text_field :artist_search, :name %>
   <%= submit_tag "search artist"%>
 <% end -%>
-<%= "<p class='warning'>#{flash[:warning]}</p>" if flash[:warning] %>
+<%=raw("<p class='warning'>#{flash[:warning]}</p>") if flash[:warning] %>
 <% if @search_results -%>
   <h2>Search results</h2>
   <% @search_results.each do |artist| -%>
@@ -66,13 +66,13 @@
       defaultLabelColor: '#999'
     });
     <% i = 0 %>
-    <% max = @artists.inject(0){ |max, artist| max = (artist.listenings || 0) < max ? max : artist.listenings } -%>
+    <% max = @artists.inject(0){ |max, artist| max = (artist.listenings || 0) < max ? max : (artist.listenings || 0) } -%>
     <% @artists.each do |artist| %>
       sigInst.addNode('<%= artist.id %>',{
         'label': '<%=raw artist.name.gsub("'", " ") + " - " + artist.listenings.to_s %>',
         'x': Math.random(),
         'y': Math.random(),
-        <% size = (Math.log(artist.listenings.to_i)/Math.log(max))*10 -%>
+        <% size = (Math.log((artist.listenings || 0).to_i)/Math.log(max))*10 -%>
         'size': <%= size < 1 ? 1 : size %>,
         'color': 'rgb(100, 50, 20)'
       });

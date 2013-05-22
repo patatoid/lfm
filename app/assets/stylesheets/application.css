@@ -15,11 +15,33 @@ p {
   margin: 10px;
   padding: 10px;
 }
+input {
+  border-radius: 10px;
+}
 #sigma-example {
+  margin: 0px;
+  padding: 0px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
   background-color: black;
-  height: 400px;
-  width: 100%;
-  /*background-color: #999;*/
+  height: 100%;
+  width: 80%;
+  float: left;
+}
+#search {
+  position: absolute;
+  top: 0px;
+  left: 80%;
+  width: 20%;
+  text-align: center;
+  height: 100%;
+  background-color: #ccc;
+}
+#controls {
+  position: fixed;
+  right: 21%;
+  bottom: 10px;
 }
 .warning {
   background-color: #faa;

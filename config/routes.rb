@@ -1,5 +1,6 @@
 LFMConstellation::Application.routes.draw do
   get "home/index"
+  get "home/search"
   post "home/index"
 
   # The priority is based upon order of creation:

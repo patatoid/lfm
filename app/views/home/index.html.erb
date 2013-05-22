@@ -1,18 +1,16 @@
 <div id="sigma-example"></div>
-<button id="filter">filter</button>
-<button id="force-atlas">start force-atlas</button>
-<%= form_tag do %>
-  <%= label :artist, :name %>
+<div id="controls">
+  <button id="filter">filter</button>
+  <button id="force-atlas">start force-atlas</button>
+</div>
+<div id="search">
+  <%= form_tag({:action => 'search'}, {:method => 'get', :remote => true, :update => :search_results}) do %>
   <%= text_field :artist_search, :name %>
-  <%= submit_tag "search artist"%>
-<% end -%>
-<%=raw("<p class='warning'>#{flash[:warning]}</p>") if flash[:warning] %>
-<% if @search_results -%>
-  <h2>Search results</h2>
-  <% @search_results.each do |artist| -%>
-    <p> <%= link_to artist.name, {:action => 'index', "artist[name]" => artist.name} %> </p>
+  <%= submit_tag "search artist" %>
   <% end -%>
-<% end -%>
+  <%=raw("<p class='warning'>#{flash[:warning]}</p>") if flash[:warning] %>
+  <div id="search_results"></div>
+</div>
 <script>
   function init() {
     /*
@@ -164,4 +162,7 @@
     } else {
     window.onload = init;
   }
+  $('form').bind('ajax:success', function(e, data, status, xhr) {
+    $('#search_results').html(xhr.responseText);
+  })
 </script>

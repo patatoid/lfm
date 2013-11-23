@@ -3,13 +3,27 @@
   <button id="filter">filter</button>
   <button id="force-atlas">start force-atlas</button>
 </div>
-<div id="search">
-  <%= form_tag({:action => 'search'}, {:method => 'get', :remote => true, :update => :search_results}) do %>
-  <%= text_field :artist_search, :name %>
-  <%= submit_tag "search artist" %>
-  <% end -%>
-  <%=raw("<p class='warning'>#{flash[:warning]}</p>") if flash[:warning] %>
-  <div id="search_results"></div>
+<div id="container">
+  <div id="header">
+    <%= image_tag 'header.png'  %>
+  </div>
+  <div id="content">
+    <%= image_tag 'logo.png', class: "img-responsive" %>
+    <div id="menu">
+      <%= link_to 'HOME', '#', remote: true %> 
+      <%= link_to 'SEARCH', '#', remote: true %> 
+      <%= link_to 'CONTACT', '#', remote: true %>
+    </div>
+    <%= form_tag({action: 'search'}, {method: 'get', remote: true, update: 'main'}) do %>
+    <%= text_field :artist_search, :name %>
+    <%= submit_tag "search artist", class: "btn btn-primary" %>
+    <% end -%>
+    <%=raw("<p class='warning'>#{flash[:warning]}</p>") if flash[:warning] %>
+    <div id="main"></div>
+  </div>
+  <div id="footer">
+    <%= image_tag "footer.png" %>
+  </div>
 </div>
 <script>
   function init() {

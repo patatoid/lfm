@@ -27,7 +27,10 @@
   </div>
 </div>
 <script>
-	$('form').on('ajax:success', function(data, res, status) {
+	$('form').on('ajax:before', function(data, res, status) {
+		$('#search_results').html("please wait...");
+	});
+  	$('form').on('ajax:success', function(data, res, status) {
 		$('#search_results').html(res);
 	});
   <% %w(search home contact).each do |n| -%>

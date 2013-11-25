@@ -9,15 +9,19 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require bootstrap_and_overrides
  *= require_tree .
  */
 body {
   font-family: Verdana, Geneva, sans-serif;
+  color: #643214;
+  font-size: 0.7EM;
 }
-p {
-  margin: 10px;
-  padding: 10px;
+a {
+  text-decoration: none;
+  color: #643214;
+}
+a:hover {
+  color: #a75;
 }
 #sigma-example {
   margin: 0px;
@@ -31,7 +35,7 @@ p {
   float: left;
 }
 #container img{
-  width: 66%
+  width: 33%
 }
 #container {
   margin: 0px;
@@ -70,6 +74,9 @@ input[type=text] {
 #header img {
   width: 100%;
 }
+#main {
+  padding: 0px 10% 0px 10%;
+}
 #menu {
   border-top: 1px solid #643214;
   border-bottom: 1px solid #643214;
@@ -77,16 +84,13 @@ input[type=text] {
   padding: 3px;
   margin: auto;
   margin-bottom: 10px;
-  color: #643214;
-}
-#menu a {
-  font-size: 0.7EM;
-  text-decoration: none;
-  color: #643214;
 }
 #content {
   position: relative;
   top: 20px;
+}
+#search_results {
+  margin-top: 10px;
 }
 #footer {
   position: absolute;

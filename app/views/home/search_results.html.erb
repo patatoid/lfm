@@ -1,0 +1,8 @@
+<% if @search_results -%>
+<% @search_results.each do |artist| -%>
+<%= link_to artist.name, {:action => 'index', "artist[name]" => artist.name} %><br />
+<% end -%>
+<% else -%>
+No results
+<% end -%>
+

@@ -1,31 +1,40 @@
 <div id="sigma-example"></div>
 <div id="controls">
   <button id="filter">filter</button>
-  <button id="force-atlas">start force-atlas</button>
+  <button id="force-atlas">stop force-atlas</button>
 </div>
 <div id="container">
   <div id="header">
     <%= image_tag 'header.png'  %>
   </div>
   <div id="content">
-    <%= image_tag 'logo.png', class: "img-responsive" %>
+    <%= image_tag 'logo.png' %>
     <div id="menu">
-      <%= link_to 'HOME', '#', remote: true %> 
-      <%= link_to 'SEARCH', '#', remote: true %> 
-      <%= link_to 'CONTACT', '#', remote: true %>
+      <%= link_to 'HOME', '/home/home', remote: true, id: 'home' %> 
+      <%= link_to 'SEARCH', '/home/search', remote: true, id: 'search' %> 
+      <%= link_to 'CONTACT', '/home/contact', remote: true, id: 'contact' %>
     </div>
-    <%= form_tag({action: 'search'}, {method: 'get', remote: true, update: 'main'}) do %>
-    <%= text_field :artist_search, :name %>
-    <%= submit_tag "search artist", class: "btn btn-primary" %>
-    <% end -%>
-    <%=raw("<p class='warning'>#{flash[:warning]}</p>") if flash[:warning] %>
-    <div id="main"></div>
+    <div id="main">
+      <%= form_tag({action: 'search_results'}, {method: 'get', remote: true}) do %>
+      <%= text_field :artist_search, :name %>
+      <%= submit_tag "search artist", class: "btn btn-primary" %>
+      <% end -%>
+      <div id="search_results"></div>
+    </div>
   </div>
   <div id="footer">
     <%= image_tag "footer.png" %>
   </div>
 </div>
 <script>
+	$('form').on('ajax:success', function(data, res, status) {
+		$('#search_results').html(res);
+	});
+  <% %w(search home contact).each do |n| -%>
+  $('#<%= n %>').on('ajax:success', function(data, res, status) {
+		$('#main').html(res);
+	});
+  <% end -%>
   function init() {
     /*
     // Instanciate sigma.js and customize it :
@@ -84,7 +93,7 @@
         'label': '<%=raw artist.name.gsub("'", " ") + " - " + artist.listenings.to_s %>',
         'x': Math.random(),
         'y': Math.random(),
-        <% size = (Math.log((artist.listenings || 0).to_i)/Math.log(max))*10 -%>
+        <% size = (Math.log((artist.listenings || 0).to_i)/Math.log(max))*20 -%>
         'size': <%= size < 1 ? 1 : size %>,
         'color': 'rgb(100, 50, 20)'
       });
@@ -97,11 +106,12 @@
         <% end %>
       <% end %>
     <% end %>
+    sigInst.iterEdges(function(e){ e.hidden = 1 });
     // Start the ForceAtlas2 algorithm
     // (requires "sigma.forceatlas2.js" to be included)
-    //sigInst.startForceAtlas2();
+    sigInst.startForceAtlas2();
 
-    var isRunning = false;
+    var isRunning = true;
     document.getElementById('force-atlas').addEventListener('click',function(){
       if(isRunning){
         isRunning = false;

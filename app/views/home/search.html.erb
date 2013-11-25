@@ -1,7 +1,10 @@
-<% if @search_results -%>
-<h2>search results</h2>
-<% @search_results.each do |artist| -%>
-<p> <%= link_to artist.name, {:action => 'index', "artist[name]" => artist.name} %> </p>
+<%= form_tag({action: 'search_results'}, {method: 'get', remote: true}) do %>
+<%= text_field :artist_search, :name %>
+<%= submit_tag "search artist", class: "btn btn-primary" %>
 <% end -%>
-<% end -%>
-
+<div id="search_results"></div>
+<script type="text/javascript" charset="utf-8">
+	$('form').on('ajax:success', function(data, res, status) {
+		$('#search_results').html(res);
+	});
+</script>

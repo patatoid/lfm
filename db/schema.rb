@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130519125510) do
+ActiveRecord::Schema.define(:version => 20131126111607) do
+
+  create_table "1000_firsts_artists", :id => false, :force => true do |t|
+    t.integer  "id",         :default => 0, :null => false
+    t.string   "name"
+    t.string   "mbid"
+    t.integer  "listenings"
+    t.string   "url"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
 
   create_table "artist_edges", :id => false, :force => true do |t|
     t.integer "parent_id"
@@ -29,6 +39,7 @@ ActiveRecord::Schema.define(:version => 20130519125510) do
     t.string   "url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.boolean  "visited"
   end
 
   add_index "artists", ["listenings"], :name => "index_artists_on_listenings"

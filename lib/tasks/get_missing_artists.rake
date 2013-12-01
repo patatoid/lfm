@@ -1,16 +1,12 @@
 task :get_missing_artists => :environment do
-  #Artist.connection.execute("UPDATE artists SET listenings = NULL")
   while true do
     i=0
-    Artist.find(:all, conditions: "listenings is null", order: "listenings DESC", limit: 10).each do |a|
-      begin
-        if i%2 == 0
-          Thread.new { a.graph(1) }
+    Artist.find(:all, conditions: "NOT EXISTS (select * from artist_edges where parent_id = artists.id)", order: "listenings DESC", limit: 5).each do |a|
+        if i%5 == 4
+          a.graph(1)
         else
-          a.graph(2)
+          Thread.new { a.graph(1) }
         end
-      rescue Exception
-      end
       i+=1
     end
   end

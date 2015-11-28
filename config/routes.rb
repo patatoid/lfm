@@ -1,10 +1,7 @@
 LFMConstellation::Application.routes.draw do
   get "home/index"
-  get "home/search"
-  get "home/search_results"
-  get "home/home"
-  get "home/contact"
-  post "home/index"
+
+  match "/websocket", :to => ActionCable.server, via: [:get, :post]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -55,7 +52,7 @@ LFMConstellation::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'Home#index'
+  root 'home#index'
 
   # See how all your routes lay out with "rake routes"
 

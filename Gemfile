@@ -1,28 +1,33 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+ruby '2.2.3'
+gem 'rails', '4.2.5'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-gem 'mysql2'
+
+gem 'slim-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails'
+  gem 'coffee-rails'
+  gem 'jquery-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier'
+
+  source 'https://rails-assets.org' do
+    gem 'rails-assets-d3'
+  end
 end
 
-gem 'jquery-rails'
 
-gem 'execjs'
 gem 'therubyracer'
 
 # To use ActiveModel has_secure_password
@@ -40,9 +45,12 @@ gem 'therubyracer'
 # To use debugger
 # gem 'debugger'
 
+# multithreaded server
+gem 'puma'
+
+# websockets
+gem 'actioncable', git: 'https://github.com/rails/actioncable.git'
+
 # xml manipulation
 gem 'nokogiri'
-# lastfm homemade gem
-gem 'lfm', :path => 'lfm'
-gem 'acts_as_graph', :path => 'acts_as_graph'
 

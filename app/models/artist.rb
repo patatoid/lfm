@@ -1,6 +1,4 @@
 class Artist < ActiveRecord::Base
-  acts_as_graph :directed => true
-
   attr_accessible :name, :mbid, :listenings, :visited
 
   def graph(depth = 2)

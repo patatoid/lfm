@@ -38,6 +38,7 @@ module LFM
 
   class Api
     def self.get(method, params={})
+      sleep(0.2)
       res = Net::HTTP.start LFM::HOST do |http|
         path = ([] << "/2.0/?method=#{method}" << params.collect{|k,v| "#{k}=#{v}"}.join("&") << "api_key=#{LFM::APIKEY}").join("&")
         puts LFM::HOST + URI.escape(path)
@@ -155,18 +156,11 @@ module LFM
 		end
 
 		#Get all the artists similar to this artist
-    def get_similar
-      i=0
-      begin
-        nok_artists = LFM::Api.get_nok("artist.getsimilar", {:artist => self.name})
-      rescue Exception
-        i+=1
-        retry if i < 5
-        return
-      end
+    def get_similar(limit)
+      nok_artists = LFM::Api.get_nok("artist.getsimilar", {:artist => self.name})
       similar_artists = {}
-      nok_artists.xpath("//artist").each do |nok_artist|
-        similar_artists.merge! nok_artist.at("match").content.to_f => Artist.new(:name => nok_artist.at("name").content, :mbid => nok_artist.at("mbid").content)
+      nok_artists.xpath("//artist").take(limit).each do |nok_artist|
+        similar_artists.merge! nok_artist.at("match").try(:content).try(:to_f) => Artist.new(:name => nok_artist.at("name").try(:content), :mbid => nok_artist.at("mbid").try(:content))
       end
       return similar_artists
     end
@@ -193,6 +187,10 @@ module LFM
         return
       end
       return nok_tracks.xpath("//playcount").inject(0) {|r, pc| r + pc.content.to_i }
+    end
+
+    def to_json
+      {name: name, mbid: mbid}
     end
   end
 end

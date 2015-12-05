@@ -54,3 +54,5 @@ gem 'actioncable', git: 'https://github.com/rails/actioncable.git'
 # xml manipulation
 gem 'nokogiri'
 
+# graph database
+gem 'neo4j'

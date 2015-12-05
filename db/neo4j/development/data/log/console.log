@@ -1,0 +1,191 @@
+2015-12-05 11:22:48.735+0000 INFO  [API] Setting startup timeout to: 120000ms based on 120000
+2015-12-05 11:25:11.310+0000 INFO  [API] Setting startup timeout to: 120000ms based on 120000
+2015-12-05 11:25:21.748+0000 INFO  [API] Successfully started database
+2015-12-05 11:25:22.398+0000 INFO  [API] Starting HTTP on port :7474 with 1 threads available
+12:25:23.704 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @16340ms
+2015-12-05 11:25:23.913+0000 INFO  [API] Mounting static content at [/webadmin] from [webadmin-html]
+2015-12-05 11:25:24.144+0000 INFO  [API] Mounting static content at [/browser] from [browser]
+12:25:24.174 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.2.4.v20141103
+12:25:24.272 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.h.MovedContextHandler@7df4dbd2{/,null,AVAILABLE}
+12:25:24.757 [main] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /webadmin, did not find org.apache.jasper.servlet.JspServlet
+12:25:24.808 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@53d13a22{/webadmin,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-server-2.2.7-static-web.jar!/webadmin-html,AVAILABLE}
+12:25:27.385 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@406796eb{/db/manage,null,AVAILABLE}
+12:25:29.552 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@42dc015c{/db/data,null,AVAILABLE}
+12:25:29.686 [main] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /browser, did not find org.apache.jasper.servlet.JspServlet
+12:25:29.700 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@3997139{/browser,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-browser-2.2.7.jar!/browser,AVAILABLE}
+12:25:30.705 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@59c16ece{/,null,AVAILABLE}
+12:25:30.763 [main] WARN  o.e.j.u.component.AbstractLifeCycle - FAILED ServerConnector@54828206{HTTP/1.1}{localhost:7474}: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_66]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[na:1.8.0_66]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[na:1.8.0_66]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_66]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_66]
+	at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:321) ~[jetty-server-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.eclipse.jetty.server.AbstractNetworkConnector.doStart(AbstractNetworkConnector.java:80) ~[jetty-server-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.eclipse.jetty.server.ServerConnector.doStart(ServerConnector.java:236) ~[jetty-server-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68) [jetty-util-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:366) [jetty-server-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68) [jetty-util-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.neo4j.server.web.Jetty9WebServer.startJetty(Jetty9WebServer.java:381) [neo4j-server-2.2.7.jar:2.2.7]
+	at org.neo4j.server.web.Jetty9WebServer.start(Jetty9WebServer.java:184) [neo4j-server-2.2.7.jar:2.2.7]
+	at org.neo4j.server.AbstractNeoServer.startWebServer(AbstractNeoServer.java:474) [neo4j-server-2.2.7.jar:2.2.7]
+	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:230) [neo4j-server-2.2.7.jar:2.2.7]
+	at org.neo4j.server.Bootstrapper.start(Bootstrapper.java:117) [neo4j-server-2.2.7.jar:2.2.7]
+	at org.neo4j.server.Bootstrapper.main(Bootstrapper.java:69) [neo4j-server-2.2.7.jar:2.2.7]
+12:25:30.765 [main] WARN  o.e.j.u.component.AbstractLifeCycle - FAILED org.eclipse.jetty.server.Server@4975a9dd: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_66]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[na:1.8.0_66]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[na:1.8.0_66]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_66]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_66]
+	at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:321) ~[jetty-server-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.eclipse.jetty.server.AbstractNetworkConnector.doStart(AbstractNetworkConnector.java:80) ~[jetty-server-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.eclipse.jetty.server.ServerConnector.doStart(ServerConnector.java:236) ~[jetty-server-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68) ~[jetty-util-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:366) ~[jetty-server-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68) ~[jetty-util-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.neo4j.server.web.Jetty9WebServer.startJetty(Jetty9WebServer.java:381) [neo4j-server-2.2.7.jar:2.2.7]
+	at org.neo4j.server.web.Jetty9WebServer.start(Jetty9WebServer.java:184) [neo4j-server-2.2.7.jar:2.2.7]
+	at org.neo4j.server.AbstractNeoServer.startWebServer(AbstractNeoServer.java:474) [neo4j-server-2.2.7.jar:2.2.7]
+	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:230) [neo4j-server-2.2.7.jar:2.2.7]
+	at org.neo4j.server.Bootstrapper.start(Bootstrapper.java:117) [neo4j-server-2.2.7.jar:2.2.7]
+	at org.neo4j.server.Bootstrapper.main(Bootstrapper.java:69) [neo4j-server-2.2.7.jar:2.2.7]
+2015-12-05 11:25:30.765+0000 ERROR [API] Failed to start Neo Server on port [7474], reason [java.net.BindException: Address already in use]
+2015-12-05 11:25:30.860+0000 INFO  [API] Successfully shutdown Neo4j Server.
+2015-12-05 11:25:32.217+0000 INFO  [API] Successfully stopped database
+2015-12-05 11:25:32.219+0000 ERROR [API] Failed to start Neo Server on port [7474]
+org.neo4j.server.ServerStartupException: Starting Neo4j Server failed: java.net.BindException: Address already in use
+	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:258) ~[neo4j-server-2.2.7.jar:2.2.7]
+	at org.neo4j.server.Bootstrapper.start(Bootstrapper.java:117) [neo4j-server-2.2.7.jar:2.2.7]
+	at org.neo4j.server.Bootstrapper.main(Bootstrapper.java:69) [neo4j-server-2.2.7.jar:2.2.7]
+Caused by: java.lang.RuntimeException: java.net.BindException: Address already in use
+	at org.neo4j.server.web.Jetty9WebServer.startJetty(Jetty9WebServer.java:385) ~[neo4j-server-2.2.7.jar:2.2.7]
+	at org.neo4j.server.web.Jetty9WebServer.start(Jetty9WebServer.java:184) ~[neo4j-server-2.2.7.jar:2.2.7]
+	at org.neo4j.server.AbstractNeoServer.startWebServer(AbstractNeoServer.java:474) ~[neo4j-server-2.2.7.jar:2.2.7]
+	at org.neo4j.server.AbstractNeoServer.start(AbstractNeoServer.java:230) ~[neo4j-server-2.2.7.jar:2.2.7]
+	... 2 common frames omitted
+Caused by: java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method) ~[na:1.8.0_66]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[na:1.8.0_66]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[na:1.8.0_66]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[na:1.8.0_66]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[na:1.8.0_66]
+	at org.eclipse.jetty.server.ServerConnector.open(ServerConnector.java:321) ~[jetty-server-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.eclipse.jetty.server.AbstractNetworkConnector.doStart(AbstractNetworkConnector.java:80) ~[jetty-server-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.eclipse.jetty.server.ServerConnector.doStart(ServerConnector.java:236) ~[jetty-server-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68) ~[jetty-util-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:366) ~[jetty-server-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:68) ~[jetty-util-9.2.4.v20141103.jar:9.2.4.v20141103]
+	at org.neo4j.server.web.Jetty9WebServer.startJetty(Jetty9WebServer.java:381) ~[neo4j-server-2.2.7.jar:2.2.7]
+	... 5 common frames omitted
+2015-12-05 11:26:46.616+0000 INFO  [API] Setting startup timeout to: 120000ms based on 120000
+2015-12-05 11:26:59.121+0000 INFO  [API] Successfully started database
+2015-12-05 11:26:59.355+0000 INFO  [API] Starting HTTP on port :7474 with 1 threads available
+12:27:00.584 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @17957ms
+2015-12-05 11:27:00.709+0000 INFO  [API] Mounting static content at [/webadmin] from [webadmin-html]
+2015-12-05 11:27:00.936+0000 INFO  [API] Mounting static content at [/browser] from [browser]
+12:27:00.967 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.2.4.v20141103
+12:27:01.105 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.h.MovedContextHandler@8542a3a{/,null,AVAILABLE}
+12:27:01.629 [main] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /webadmin, did not find org.apache.jasper.servlet.JspServlet
+12:27:01.735 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@566a052e{/webadmin,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-server-2.2.7-static-web.jar!/webadmin-html,AVAILABLE}
+12:27:04.328 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@39173b35{/db/manage,null,AVAILABLE}
+12:27:05.701 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@f0e4421{/db/data,null,AVAILABLE}
+12:27:05.810 [main] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /browser, did not find org.apache.jasper.servlet.JspServlet
+12:27:05.822 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@b315dd8{/browser,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-browser-2.2.7.jar!/browser,AVAILABLE}
+12:27:06.526 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@51780404{/,null,AVAILABLE}
+12:27:06.597 [main] INFO  o.e.jetty.server.ServerConnector - Started ServerConnector@3bd0a8b9{HTTP/1.1}{localhost:7474}
+12:27:06.598 [main] INFO  org.eclipse.jetty.server.Server - Started @24025ms
+2015-12-05 11:27:06.598+0000 INFO  [API] Server started on: http://localhost:7474/
+2015-12-05 11:27:06.606+0000 INFO  [API] Remote interface ready and available at [http://localhost:7474/]
+2015-12-05 11:28:34.475+0000 INFO  [API] Neo4j Server shutdown initiated by request
+12:28:34.616 [Thread-11] INFO  o.e.jetty.server.ServerConnector - Stopped ServerConnector@3bd0a8b9{HTTP/1.1}{localhost:7474}
+12:28:34.627 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@51780404{/,null,UNAVAILABLE}
+12:28:34.631 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.w.WebAppContext@b315dd8{/browser,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-browser-2.2.7.jar!/browser,UNAVAILABLE}
+12:28:34.632 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@f0e4421{/db/data,null,UNAVAILABLE}
+12:28:34.634 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@39173b35{/db/manage,null,UNAVAILABLE}
+12:28:34.644 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.w.WebAppContext@566a052e{/webadmin,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-server-2.2.7-static-web.jar!/webadmin-html,UNAVAILABLE}
+12:28:34.648 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.h.MovedContextHandler@8542a3a{/,null,UNAVAILABLE}
+2015-12-05 11:28:34.693+0000 INFO  [API] Successfully shutdown Neo4j Server.
+2015-12-05 11:28:36.013+0000 INFO  [API] Successfully stopped database
+2015-12-05 11:28:36.014+0000 INFO  [API] Successfully shutdown database.
+2015-12-05 11:28:45.952+0000 INFO  [API] Setting startup timeout to: 120000ms based on 120000
+2015-12-05 11:28:53.692+0000 INFO  [API] Successfully started database
+2015-12-05 11:28:54.070+0000 INFO  [API] Starting HTTP on port :7474 with 1 threads available
+12:28:55.468 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @13470ms
+2015-12-05 11:28:55.725+0000 INFO  [API] Mounting static content at [/webadmin] from [webadmin-html]
+2015-12-05 11:28:55.991+0000 INFO  [API] Mounting static content at [/browser] from [browser]
+12:28:56.016 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.2.4.v20141103
+12:28:56.154 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.h.MovedContextHandler@8542a3a{/,null,AVAILABLE}
+12:28:56.645 [main] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /webadmin, did not find org.apache.jasper.servlet.JspServlet
+12:28:56.701 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@566a052e{/webadmin,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-server-2.2.7-static-web.jar!/webadmin-html,AVAILABLE}
+12:28:59.400 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@39173b35{/db/manage,null,AVAILABLE}
+12:29:00.828 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@f0e4421{/db/data,null,AVAILABLE}
+12:29:00.958 [main] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /browser, did not find org.apache.jasper.servlet.JspServlet
+12:29:00.971 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@b315dd8{/browser,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-browser-2.2.7.jar!/browser,AVAILABLE}
+12:29:01.677 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@51780404{/,null,AVAILABLE}
+12:29:01.763 [main] INFO  o.e.jetty.server.ServerConnector - Started ServerConnector@2088e77d{HTTP/1.1}{localhost:7474}
+12:29:01.765 [main] INFO  org.eclipse.jetty.server.Server - Started @19804ms
+2015-12-05 11:29:01.771+0000 INFO  [API] Server started on: http://localhost:7474/
+2015-12-05 11:29:01.781+0000 INFO  [API] Remote interface ready and available at [http://localhost:7474/]
+2015-12-05 11:33:41.340+0000 INFO  [API] Neo4j Server shutdown initiated by request
+12:33:41.380 [Thread-11] INFO  o.e.jetty.server.ServerConnector - Stopped ServerConnector@2088e77d{HTTP/1.1}{localhost:7474}
+12:33:41.388 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@51780404{/,null,UNAVAILABLE}
+12:33:41.409 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.w.WebAppContext@b315dd8{/browser,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-browser-2.2.7.jar!/browser,UNAVAILABLE}
+12:33:41.417 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@f0e4421{/db/data,null,UNAVAILABLE}
+12:33:41.420 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@39173b35{/db/manage,null,UNAVAILABLE}
+12:33:41.429 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.w.WebAppContext@566a052e{/webadmin,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-server-2.2.7-static-web.jar!/webadmin-html,UNAVAILABLE}
+12:33:41.431 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.h.MovedContextHandler@8542a3a{/,null,UNAVAILABLE}
+2015-12-05 11:33:41.486+0000 INFO  [API] Successfully shutdown Neo4j Server.
+2015-12-05 11:33:42.737+0000 INFO  [API] Successfully stopped database
+2015-12-05 11:33:42.738+0000 INFO  [API] Successfully shutdown database.
+2015-12-05 11:33:47.833+0000 INFO  [API] Setting startup timeout to: 120000ms based on 120000
+2015-12-05 11:33:55.575+0000 INFO  [API] Successfully started database
+2015-12-05 11:33:55.923+0000 INFO  [API] Starting HTTP on port :7475 with 1 threads available
+12:33:57.306 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @13386ms
+2015-12-05 11:33:57.579+0000 INFO  [API] Mounting static content at [/webadmin] from [webadmin-html]
+2015-12-05 11:33:57.845+0000 INFO  [API] Mounting static content at [/browser] from [browser]
+12:33:57.874 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.2.4.v20141103
+12:33:58.041 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.h.MovedContextHandler@8542a3a{/,null,AVAILABLE}
+12:33:58.628 [main] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /webadmin, did not find org.apache.jasper.servlet.JspServlet
+12:33:58.682 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@566a052e{/webadmin,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-server-2.2.7-static-web.jar!/webadmin-html,AVAILABLE}
+12:34:01.303 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@39173b35{/db/manage,null,AVAILABLE}
+12:34:02.716 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@f0e4421{/db/data,null,AVAILABLE}
+12:34:02.827 [main] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /browser, did not find org.apache.jasper.servlet.JspServlet
+12:34:02.843 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@b315dd8{/browser,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-browser-2.2.7.jar!/browser,AVAILABLE}
+12:34:03.588 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@51780404{/,null,AVAILABLE}
+12:34:03.658 [main] INFO  o.e.jetty.server.ServerConnector - Started ServerConnector@2088e77d{HTTP/1.1}{localhost:7475}
+12:34:03.659 [main] INFO  org.eclipse.jetty.server.Server - Started @19802ms
+2015-12-05 11:34:03.670+0000 INFO  [API] Server started on: http://localhost:7475/
+2015-12-05 11:34:03.671+0000 INFO  [API] Remote interface ready and available at [http://localhost:7475/]
+2015-12-05 13:08:48.796+0000 INFO  [API] Neo4j Server shutdown initiated by request
+14:08:49.536 [Thread-11] INFO  o.e.jetty.server.ServerConnector - Stopped ServerConnector@2088e77d{HTTP/1.1}{localhost:7475}
+14:08:49.555 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@51780404{/,null,UNAVAILABLE}
+14:08:49.601 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.w.WebAppContext@b315dd8{/browser,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-browser-2.2.7.jar!/browser,UNAVAILABLE}
+14:08:49.604 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@f0e4421{/db/data,null,UNAVAILABLE}
+14:08:49.609 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@39173b35{/db/manage,null,UNAVAILABLE}
+14:08:49.616 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.w.WebAppContext@566a052e{/webadmin,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-server-2.2.7-static-web.jar!/webadmin-html,UNAVAILABLE}
+14:08:49.616 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.h.MovedContextHandler@8542a3a{/,null,UNAVAILABLE}
+2015-12-05 13:08:49.781+0000 INFO  [API] Successfully shutdown Neo4j Server.
+2015-12-05 13:08:54.791+0000 INFO  [API] Successfully stopped database
+2015-12-05 13:08:54.792+0000 INFO  [API] Successfully shutdown database.
+2015-12-05 14:45:46.634+0000 INFO  [API] Setting startup timeout to: 120000ms based on 120000
+2015-12-05 14:45:57.650+0000 INFO  [API] Successfully started database
+2015-12-05 14:45:58.083+0000 INFO  [API] Starting HTTP on port :7475 with 1 threads available
+15:45:59.612 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @20010ms
+2015-12-05 14:45:59.758+0000 INFO  [API] Mounting static content at [/webadmin] from [webadmin-html]
+2015-12-05 14:46:00.043+0000 INFO  [API] Mounting static content at [/browser] from [browser]
+15:46:00.077 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.2.4.v20141103
+15:46:00.223 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.h.MovedContextHandler@3729434b{/,null,AVAILABLE}
+15:46:00.819 [main] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /webadmin, did not find org.apache.jasper.servlet.JspServlet
+15:46:00.920 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@a6e068a{/webadmin,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-server-2.2.7-static-web.jar!/webadmin-html,AVAILABLE}
+15:46:03.701 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@2e72f32a{/db/manage,null,AVAILABLE}
+15:46:05.164 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@1722abf1{/db/data,null,AVAILABLE}
+15:46:05.271 [main] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /browser, did not find org.apache.jasper.servlet.JspServlet
+15:46:05.283 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@55ef36c3{/browser,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-browser-2.2.7.jar!/browser,AVAILABLE}
+15:46:05.966 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@52fa7f62{/,null,AVAILABLE}
+15:46:06.117 [main] INFO  o.e.jetty.server.ServerConnector - Started ServerConnector@5633e413{HTTP/1.1}{localhost:7475}
+15:46:06.118 [main] INFO  org.eclipse.jetty.server.Server - Started @26537ms
+2015-12-05 14:46:06.118+0000 INFO  [API] Server started on: http://localhost:7475/
+2015-12-05 14:46:06.119+0000 INFO  [API] Remote interface ready and available at [http://localhost:7475/]

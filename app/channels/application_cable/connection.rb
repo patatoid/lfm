@@ -3,7 +3,7 @@ module ApplicationCable
     identified_by :current_user
 
     def connect
-      self.current_user = cookies['_LFMConstellation_session']
+      self.current_user = current_user # cookies['_LFMConstellation_session']
     end
   end
 end

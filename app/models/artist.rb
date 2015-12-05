@@ -1,24 +1,31 @@
-class Artist < ActiveRecord::Base
-  attr_accessible :name, :mbid, :listenings, :visited
+class Artist
+  include Neo4j::ActiveNode
+  property :mbid, index: :exact
+  property :name, type: String
+  property :listenings, type: Integer
+  property :visited, type: Boolean
+  property :updated_at
 
-  def graph(depth = 2)
+  has_many :both, :similar, type: :similar, model_class: :Artist
+
+  def graph(depth = 2, limit = 10)
     lfma = LFM::Artist.new(:name => self.name, :mbid => self.mbid)
     self.update_attributes listenings: lfma.listenings, visited: true
     puts "Get the sons of #{self.name}"
-    as = lfma.get_similar.collect do |match, lfma_son|
-      a = Artist.find_or_create_by_name_and_mbid(lfma_son.name, lfma_son.mbid)
-      unless a.reload.visited
-        begin
-          unless depth == 0 
-            a.graph(depth - 1)
-          else
-            a.update_attributes listenings: lfma_son.listenings unless a.listenings
-          end
-        rescue Exception
-        end
+    lfma.get_similar(limit).each do |match, lfma_son|
+      similar = Artist.where(name: lfma_son.name, mbid: lfma_son.mbid).first
+      unless similar
+        similar = Artist.create(name: lfma_son.name, mbid: lfma_son.mbid)
       end
-      {:parent_id => self.id, :child_id => a.id, :weight => match}
+      self.create_rel(:similar, similar, matching: match)
+      begin
+        if depth > 0
+          similar.graph(depth - 1)
+        else
+          similar.update listenings: lfma_son.listenings
+        end
+      rescue Exception
+      end unless similar.visited
     end
-    ArtistEdge.create(as)
   end
 end

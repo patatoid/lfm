@@ -17,6 +17,6 @@ module LFMConstellation
     # neo4j
     config.generators { |g| g.orm :neo4j }
     config.neo4j.session_type = :server_db
-    config.neo4j.session_path = ENV['NEO4J_URL'] || 'http://localhost:7475'
+    config.neo4j.session_path = ENV['GRAPHSTORY_URL'] || 'http://localhost:7475'
   end
 end

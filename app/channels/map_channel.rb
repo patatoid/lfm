@@ -16,7 +16,7 @@ class MapChannel < ActionCable::Channel::Base
       end
     end
 
-    root = LFM::Artist.get_correction('selah sue')
-    bfs(root, 2)
+    # root = LFM::Artist.get_correction('selah sue')
+    # bfs(root, 2)
   end
 end

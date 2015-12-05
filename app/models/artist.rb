@@ -11,7 +11,7 @@ class Artist
   def graph(depth = 2, limit = 10)
     lfma = LFM::Artist.new(:name => self.name, :mbid => self.mbid)
     self.update_attributes listenings: lfma.listenings, visited: true
-    puts "Get the sons of #{self.name}"
+    logger.info "Get the sons of #{self.name}"
     lfma.get_similar(limit).each do |match, lfma_son|
       similar = Artist.where(name: lfma_son.name, mbid: lfma_son.mbid).first
       unless similar

@@ -50,6 +50,9 @@ gem 'pg', group: :production
 # multithreaded server
 gem 'puma'
 
+# async jobs
+gem 'sidekiq'
+
 # websockets
 gem 'actioncable', git: 'https://github.com/rails/actioncable.git'
 

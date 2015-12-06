@@ -18,5 +18,8 @@ module LFMConstellation
     config.generators { |g| g.orm :neo4j }
     config.neo4j.session_type = :server_db
     config.neo4j.session_path = ENV['GRAPHSTORY_URL'] || 'http://localhost:7475'
+
+    # background jobs
+    config.active_job.queue_adapter = :sidekiq
   end
 end

@@ -1,1 +1,1 @@
-worker: bundle exec rake generate_graph
+worker: bundle exec sidekiq

@@ -189,3 +189,33 @@ Caused by: java.net.BindException: Address already in use
 15:46:06.118 [main] INFO  org.eclipse.jetty.server.Server - Started @26537ms
 2015-12-05 14:46:06.118+0000 INFO  [API] Server started on: http://localhost:7475/
 2015-12-05 14:46:06.119+0000 INFO  [API] Remote interface ready and available at [http://localhost:7475/]
+2015-12-05 16:03:05.603+0000 INFO  [API] Neo4j Server shutdown initiated by request
+17:03:06.536 [Thread-11] INFO  o.e.jetty.server.ServerConnector - Stopped ServerConnector@5633e413{HTTP/1.1}{localhost:7475}
+17:03:06.822 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@52fa7f62{/,null,UNAVAILABLE}
+17:03:06.829 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.w.WebAppContext@55ef36c3{/browser,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-browser-2.2.7.jar!/browser,UNAVAILABLE}
+17:03:06.833 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@1722abf1{/db/data,null,UNAVAILABLE}
+17:03:06.841 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@2e72f32a{/db/manage,null,UNAVAILABLE}
+17:03:06.851 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.w.WebAppContext@a6e068a{/webadmin,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-server-2.2.7-static-web.jar!/webadmin-html,UNAVAILABLE}
+17:03:06.852 [Thread-11] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.h.MovedContextHandler@3729434b{/,null,UNAVAILABLE}
+2015-12-05 16:03:07.383+0000 INFO  [API] Successfully shutdown Neo4j Server.
+2015-12-05 16:03:10.017+0000 INFO  [API] Successfully stopped database
+2015-12-05 16:03:10.018+0000 INFO  [API] Successfully shutdown database.
+2015-12-06 12:47:51.049+0000 INFO  [API] Setting startup timeout to: 120000ms based on 120000
+2015-12-06 12:48:10.763+0000 INFO  [API] Successfully started database
+2015-12-06 12:48:11.707+0000 INFO  [API] Starting HTTP on port :7475 with 1 threads available
+13:48:14.419 [main] INFO  org.eclipse.jetty.util.log - Logging initialized @34261ms
+2015-12-06 12:48:14.768+0000 INFO  [API] Mounting static content at [/webadmin] from [webadmin-html]
+2015-12-06 12:48:15.450+0000 INFO  [API] Mounting static content at [/browser] from [browser]
+13:48:15.493 [main] INFO  org.eclipse.jetty.server.Server - jetty-9.2.4.v20141103
+13:48:15.798 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.h.MovedContextHandler@3729434b{/,null,AVAILABLE}
+13:48:16.976 [main] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /webadmin, did not find org.apache.jasper.servlet.JspServlet
+13:48:17.207 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@a6e068a{/webadmin,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-server-2.2.7-static-web.jar!/webadmin-html,AVAILABLE}
+13:48:23.253 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@2e72f32a{/db/manage,null,AVAILABLE}
+13:48:26.219 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@1722abf1{/db/data,null,AVAILABLE}
+13:48:26.510 [main] INFO  o.e.j.w.StandardDescriptorProcessor - NO JSP Support for /browser, did not find org.apache.jasper.servlet.JspServlet
+13:48:26.542 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.w.WebAppContext@55ef36c3{/browser,jar:file:/home/pascal/ruby/rails/lfm/db/neo4j/development/system/lib/neo4j-browser-2.2.7.jar!/browser,AVAILABLE}
+13:48:28.016 [main] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@52fa7f62{/,null,AVAILABLE}
+13:48:28.212 [main] INFO  o.e.jetty.server.ServerConnector - Started ServerConnector@23ca1906{HTTP/1.1}{localhost:7475}
+13:48:28.213 [main] INFO  org.eclipse.jetty.server.Server - Started @48088ms
+2015-12-06 12:48:28.220+0000 INFO  [API] Server started on: http://localhost:7475/
+2015-12-06 12:48:28.228+0000 INFO  [API] Remote interface ready and available at [http://localhost:7475/]

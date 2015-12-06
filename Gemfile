@@ -45,6 +45,8 @@ gem 'therubyracer'
 # To use debugger
 # gem 'debugger'
 
+gem 'pg', group: :production
+
 # multithreaded server
 gem 'puma'
 

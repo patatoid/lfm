@@ -2,8 +2,14 @@ class GetDataJob < ActiveJob::Base
   queue_as :default
 
   def perform(*args)
-    Artist.where(visited: nil).limit(100).each do |a|
-      a.graph(10, 100)
+    while true
+      Artist
+        .where('result_artist.listenings IS NOT NULL AND result_artist.visited IS NULL')
+        .order('result_artist.listenings DESC')
+        .limit(1)
+        .each do |a|
+        a.graph(5, 100)
+      end
     end
   end
 end

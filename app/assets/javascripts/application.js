@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require angular
+//= require angular-rails-templates
+//= require angular-ui-router
 //= require d3
-//= require cable/app
+//= require ng/app
 //= require map

@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.2.3'
 gem 'rails', '4.2.5'
+gem 'sprockets', '2.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -16,6 +17,7 @@ group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'jquery-rails'
+  gem 'bootstrap-sass'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -24,8 +26,11 @@ group :assets do
 
   source 'https://rails-assets.org' do
     gem 'rails-assets-d3'
+    gem 'rails-assets-angular'
+    gem 'rails-assets-angular-ui-router'
   end
 end
+gem 'angular-rails-templates'
 
 
 gem 'therubyracer'

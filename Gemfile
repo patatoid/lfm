@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.3'
+ruby '2.3.0'
 gem 'rails', '4.2.5'
 gem 'sprockets', '2.8'
 
@@ -27,10 +27,13 @@ group :assets do
   source 'https://rails-assets.org' do
     gem 'rails-assets-d3'
     gem 'rails-assets-angular'
+    gem 'rails-assets-angular-sanitize'
+    gem 'rails-assets-angular-ui-select'
     gem 'rails-assets-angular-ui-router'
   end
 end
 gem 'angular-rails-templates'
+gem 'js-routes'
 
 
 gem 'therubyracer'

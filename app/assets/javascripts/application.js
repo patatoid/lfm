@@ -15,6 +15,9 @@
 //= require angular
 //= require angular-rails-templates
 //= require angular-ui-router
+//= require angular-ui-select
+//= require angular-sanitize
 //= require d3
+//= require js-routes
 //= require ng/app
 //= require map

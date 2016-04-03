@@ -4,6 +4,7 @@
 @App = angular.module('lfm',[
   'templates'
   'ui.router'
+  'ui.select'
 ])
 
 

@@ -1,4 +1,10 @@
 LFMConstellation::Application.routes.draw do
+  resources :artists, only: :index do
+    collection do
+      get 'search'
+    end
+  end
+
   get "home/index"
 
   match "/websocket", :to => ActionCable.server, via: [:get, :post]

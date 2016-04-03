@@ -28,4 +28,8 @@ class Artist
       end unless similar.visited
     end
   end
+
+  def as_json(*params)
+    super(*params).values.pop
+  end
 end

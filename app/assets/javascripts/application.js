@@ -20,4 +20,4 @@
 //= require d3
 //= require js-routes
 //= require ng/app
-//= require map
+// require map

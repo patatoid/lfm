@@ -1,7 +1,10 @@
 @App.controller('MapController', ['$scope', 'ArtistService', ($scope, ArtistService)->
   $scope.$watch(
-    'artist'
-    (newArtist, oldArtist)->
-      $scope.similar = artist.similar()
+    'search'
+    (newSearch, oldSearch)->
+      newSearch.artist.similar(newSearch).then (artists)->
+        $scope.similar = artists
+        console.log artists
+    true
   )
 ])

@@ -1,8 +1,19 @@
 .row
   .col-md-6.col-md-offset-3
     div ng-class="{'loading': loading}"
-      ui-select ng-model="artist"
+      ui-select ng-model="search.artist"
         ui-select-match
           span ng-bind="$select.selected.name"
         ui-select-choices repeat="item in (searchResults | filter: $select.search) track by $index" refresh="searchArtist($select.search)" refresh-rate="0"
           span ng-bind="item.name"
+.row
+  .col-md-4
+    .filters
+      .form-group
+        label Max listenings
+        input.form-control(ng-model='search.max_listenings')
+      .form-group
+        label Min listenings
+        input.form-control(ng-model='search.min_listenings')
+  .col-md-8
+    ui-view

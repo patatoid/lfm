@@ -14,5 +14,7 @@
 /log/*.log
 /tmp
 
+/db/neo4j
+
 #vim swp
 *.swp

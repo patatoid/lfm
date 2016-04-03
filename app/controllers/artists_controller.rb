@@ -9,6 +9,7 @@ class ArtistsController < ApplicationController
     @artists = @artist.similar(:artist)
     @artists = @artists.where('artist.listenings < ?', params[:max_listenings].to_i) if params[:max_listenings].present?
     @artists = @artists.where('artist.listenings > ?', params[:min_listenings].to_i) if params[:min_listenings].present?
+    @artists = @artists.order(listenings: :desc)
     render json: @artists
   end
 end

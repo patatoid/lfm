@@ -6,6 +6,8 @@ class Artist
   property :visited, type: Boolean
   property :updated_at
 
+  attr_accessor :matching
+
   has_many :both, :similar, type: :similar, model_class: :Artist
 
   def graph(depth = 2, limit = 10)
@@ -13,7 +15,7 @@ class Artist
     self.update_attributes listenings: lfma.listenings, visited: true
     puts "Get the sons of #{self.name}"
     lfma.get_similar(limit).each do |match, lfma_son|
-      similar = Artist.where(name: lfma_son.name, mbid: lfma_son.mbid).first
+      similar = Artist.where(name: lfma_son.name).first
       unless similar
         similar = Artist.create(name: lfma_son.name, mbid: lfma_son.mbid)
       end
@@ -30,6 +32,6 @@ class Artist
   end
 
   def as_json(*params)
-    super(*params).values.pop
+    super(*params).values.pop.merge(matching: matching)
   end
 end

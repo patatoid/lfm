@@ -5,11 +5,14 @@ class ArtistsController < ApplicationController
 
   def similar
     @artist = Artist.find_by(mbid: params[:id])
-    # raise @artist.inspect
-    @artists = @artist.similar(:artist)
-    @artists = @artists.where('artist.listenings < ?', params[:max_listenings].to_i) if params[:max_listenings].present?
-    @artists = @artists.where('artist.listenings > ?', params[:min_listenings].to_i) if params[:min_listenings].present?
-    @artists = @artists.order(listenings: :desc)
-    render json: @artists
+    @searcher = Searcher.new(searcher_params.merge(artist: @artist))
+    # raise @searcher.artists.inspect
+    render json: @searcher.artists
+  end
+
+  private
+
+  def searcher_params
+    params.require(:searcher).permit(:max_listenings, :min_listenings, :depth)
   end
 end

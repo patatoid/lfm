@@ -4,6 +4,6 @@ task :generate_graph => :environment do
     a = Artist.create(:name => a.name, :mbid => a.mbid)
   end
   Artist.where(visited: nil).each do |a|
-    a.graph(10, 100)
+    a.graph(2, 10)
   end
 end

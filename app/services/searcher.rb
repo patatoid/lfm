@@ -12,7 +12,7 @@ class Searcher
     @artists = @artists.order('artist.listenings desc')
     @artists = @artists.limit(50)
     @artists = @artists.pluck('DISTINCT(artist)')
-    @links = Neo4j::Session.query("MATCH (source:Artist)-[rel:similar]->(target:Artist) WHERE source.mbid IN #{@artists.map(&:mbid)} AND target.mbid IN #{@artists.map(&:mbid)} RETURN source.mbid, target.mbid, rel.matching")
+    @links = Neo4j::Session.query("MATCH (source:Artist)-[rel:similar]->(target:Artist) WHERE source.mbid IN #{@artists.map(&:mbid).compact} AND target.mbid IN #{@artists.map(&:mbid).compact} RETURN source.mbid, target.mbid, rel.matching")
     @links = @links.to_a.map { |e| [e['source.mbid'], e['target.mbid'], e['rel.matching']]}
   end
 end

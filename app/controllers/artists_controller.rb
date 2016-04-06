@@ -6,8 +6,8 @@ class ArtistsController < ApplicationController
   def similar
     @artist = Artist.find_by(mbid: params[:id])
     @searcher = Searcher.new(searcher_params.merge(artist: @artist))
-    # raise @searcher.artists.inspect
-    render json: @searcher.artists
+    # raise @searcher.links.inspect
+    render json: @searcher
   end
 
   private

@@ -14,7 +14,8 @@
   Service.prototype.similar = (filters)->
     defer = $q.defer()
     $http.post(Routes.similar_artist_path({id: this.mbid || ''}), {searcher: filters}).then (response)->
-      defer.resolve(response.data.map (e)-> new Service(e))
+      response.data.artists = response.data.artists.map (e)-> new Service(e)
+      defer.resolve(response.data)
     defer.promise
 
   Service

@@ -32,6 +32,6 @@ class Artist
   end
 
   def as_json(*params)
-    super(*params).values.pop.merge(matching: matching)
+    super(*params).values.pop
   end
 end

@@ -17,7 +17,7 @@ html, body {
   height: 100%;
 }
 .map {
-  height: 100%;
+  height: calc(100vh - 34px);
 }
 .loading {
   border-left: 5px solid red;

@@ -1,7 +1,7 @@
 class Searcher
   include ActiveModel::Model
 
-  attr_accessor :max_listenings, :min_listenings, :depth, :artists, :artist
+  attr_accessor :max_listenings, :min_listenings, :depth, :artists, :artist, :links
 
   def initialize(params)
     super(params)
@@ -11,10 +11,8 @@ class Searcher
     @artists = @artists.where('artist.listenings > ?', params[:min_listenings].to_i) if params[:min_listenings].present?
     @artists = @artists.order('artist.listenings desc')
     @artists = @artists.limit(50)
-    @artists = @artists.pluck('DISTINCT(artist), similarity').map do |res|
-      res[0].matching = res[1].inject(1) { |acc, e| acc * e.get_property('matching') }
-      res[0]
-    end
-    @artists = @artists.sort_by(&:matching).reverse
+    @artists = @artists.pluck('DISTINCT(artist)')
+    @links = Neo4j::Session.query("MATCH (source:Artist)-[rel:similar]->(target:Artist) WHERE source.mbid IN #{@artists.map(&:mbid)} AND target.mbid IN #{@artists.map(&:mbid)} RETURN source.mbid, target.mbid, rel.matching")
+    @links = @links.to_a.map { |e| [e['source.mbid'], e['target.mbid'], e['rel.matching']]}
   end
 end

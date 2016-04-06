@@ -73,7 +73,7 @@
 
     window.force = d3.layout.force()
       .charge(-100)
-      .linkDistance((e, index)-> 50 * Math.pow(1 / e.weight, 2))
+      .linkDistance((e, index)-> 200 * e.weight)
       .size([width, height])
       .nodes([])
       .links([])

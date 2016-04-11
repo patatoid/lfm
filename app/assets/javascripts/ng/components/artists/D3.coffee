@@ -24,15 +24,35 @@
         if (quad.point && (quad.point != node))
           x = node.x - quad.point.x
           y = node.y - quad.point.y
-          l = Math.sqrt(x * x + y * y)
-          r = node.radius + quad.point.radius
-          if (l < r)
-            l = (l - r) / l * .5
-            node.x -= x *= l
-            node.y -= y *= l
+          xSpacing = (quad.point.width + node.width) / 2
+          ySpacing = (quad.point.height + node.height) / 2
+          absX = Math.abs(x)
+          absY = Math.abs(y)
+          if (absX < xSpacing && absY < ySpacing)
+            l = Math.sqrt(x * x + y * y)
+            lx = (absX - xSpacing) / l
+            ly = (absY - ySpacing) / l
+            if (Math.abs(lx) > Math.abs(ly))
+              lx = 0
+            else
+              ly = 0
+            node.x -= x *= lx
+            node.y -= y *= ly
             quad.point.x += x
             quad.point.y += y
-        x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1
+            true
+          if x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1
+            x = node.x - quad.point.x
+            y = node.y - quad.point.y
+            l = Math.sqrt(x * x + y * y)
+            r = node.radius + quad.point.radius
+            if (l < r)
+              l = (l - r) / l * .5
+              node.x -= x *= l
+              node.y -= y *= l
+              quad.point.x += x
+              quad.point.y += y
+            true
 
     draw = () ->
       node = vis.selectAll(".node").data(force.nodes()).enter().insert("g")
@@ -44,9 +64,12 @@
           .attr("fill", "red")
           .attr('text-anchor', 'middle')
           .text((d)-> d.name)
+      node.each (d)->
+        d.width = $(this).find('text').width() + 15
+        d.height = $(this).find('text').height() + 15
       vis.selectAll('.link').data(force.links()).enter().insert("line")
         .attr("class", 'link')
-        .attr('stroke', 'black')
+        # .attr('stroke', '#eeeeee')
         .attr('stroke-opacity', '0.5')
     
     render = () ->
@@ -73,7 +96,7 @@
 
     window.force = d3.layout.force()
       .charge(-100)
-      .linkDistance((e, index)-> 200 * (1 - e.weight))
+      .linkDistance((e, index)-> 300 * (1 - e.weight))
       .size([width, height])
       .nodes([])
       .links([])

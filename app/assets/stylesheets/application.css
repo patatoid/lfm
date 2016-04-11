@@ -22,3 +22,8 @@ html, body {
 .loading {
   border-left: 5px solid red;
 }
+
+text.label {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}

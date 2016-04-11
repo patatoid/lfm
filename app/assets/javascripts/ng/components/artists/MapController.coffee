@@ -3,10 +3,15 @@
     'search'
     (newSearch, oldSearch)->
       newSearch.artist.similar(newSearch).then (searcher)->
+        window.force.nodes([])
+        window.force.links([])
+        $('.node').remove()
+        $('.link').remove()
+        $('.label').remove()
+        window.force.start()
         window.force.nodes(searcher.artists)
         links = []
         for link in searcher.links
-          console.log searcher.artists.filter((e)-> e.mbid == link[0]).pop()
           links.push {
             source: searcher.artists.indexOf(
               searcher.artists.filter((e)-> e.mbid == link[0]).pop()
@@ -16,7 +21,6 @@
             )
             weight: link[2]
           }
-        console.log(links)
         window.force.links(links)
         window.force.start()
     true
